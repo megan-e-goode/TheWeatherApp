@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "877652af-1737-4c7c-a9ef-8acdd9d941ae": {
+      "ProjectGuid": "877652af-1737-4c7c-a9ef-8acdd9d941ae",
+      "DisplayName": "TheWeatherApp.Api",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
