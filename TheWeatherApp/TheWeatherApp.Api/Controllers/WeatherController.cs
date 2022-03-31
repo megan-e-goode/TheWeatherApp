@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TheWeatherApp.Api.Models;
 
-[ApiController]
-[Route("[controller]")]
+// [ApiController]
+// [Route("[controller]")]
+[Route("api/[controller]")]
 public class WeatherController : ControllerBase
 {
     private readonly ILogger<WeatherController> _logger;
@@ -20,15 +21,16 @@ public class WeatherController : ControllerBase
         _key = _configuration.GetValue<string>("ApiKey");
     }
 
-    [HttpGet(Name = "GetWeather")]
-    public async Task<ActionResult<WeatherResponse>> Get(string cityName)
+    // [HttpGet]
+    [HttpGet("[action]/{cityName}")]
+    public async Task<ActionResult<WeatherResponse>> GetWeather(string cityName = "London")
     {
         using (var client = new HttpClient())
         {
             try
             {
                 client.BaseAddress = _baseAddress;
-                var response = await client.GetAsync($"weather?q={cityName}&appid={_key}");
+                var response = await client.GetAsync($"weather?q={cityName}&appid={_key}").ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
                 var responseAsString = await response.Content.ReadAsStringAsync();
@@ -41,8 +43,7 @@ public class WeatherController : ControllerBase
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
-            
+            }            
         }
     }
 }

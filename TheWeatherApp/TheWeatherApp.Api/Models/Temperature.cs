@@ -1,23 +1,23 @@
 ﻿namespace TheWeatherApp.Api.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 public class Temperature
 {
-    [JsonPropertyName("temp")]
+    [JsonProperty("temp")]
     public decimal Actual { get; set; }
 
-    [JsonPropertyName("feels_like")]
+    [JsonProperty("feels_like")]
     public decimal FeelsLike { get; set; }
 
-    [JsonPropertyName("temp_min")]
+    [JsonProperty("temp_min")]
     public decimal Min { get; set; }
 
-    [JsonPropertyName("temp_max")]
+    [JsonProperty("temp_max")]
     public decimal Max { get; set; }
 
-    [JsonPropertyName("pressure")]
+    [JsonProperty("pressure")]
     public decimal Pressure { get; set; }
 
-    [JsonPropertyName("humidity")]
+    [JsonProperty("humidity")]
     public decimal Humidity { get; set; }
 }

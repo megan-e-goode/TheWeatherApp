@@ -1,14 +1,14 @@
 ﻿namespace TheWeatherApp.Api.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 public class Weather
 {
-    [JsonPropertyName("id")]
+    [JsonProperty("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("main")]
+    [JsonProperty("main")]
     public string Type { get; set; }
 
-    [JsonPropertyName("description")]
+    [JsonProperty("description")]
     public string Description { get; set; }
 }
