@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TheWeatherApp.Api.Models;
 
-// [ApiController]
-// [Route("[controller]")]
 [Route("api/[controller]")]
 public class WeatherController : ControllerBase
 {
@@ -21,7 +19,6 @@ public class WeatherController : ControllerBase
         _key = _configuration.GetValue<string>("ApiKey");
     }
 
-    // [HttpGet]
     [HttpGet("[action]")]
     public async Task<ActionResult<WeatherResponse>> GetWeather(string location = "London")
     {
