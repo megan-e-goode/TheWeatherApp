@@ -25,3 +25,4 @@ C:\Users\MGoode\Documents\MiSelf\PDP\2021-2022\TheWeatherApp\TheWeatherApp\TheWe
 C:\Users\MGoode\Documents\MiSelf\PDP\2021-2022\TheWeatherApp\TheWeatherApp\TheWeatherApp.Api\obj\Debug\net6.0\ref\TheWeatherApp.Api.dll
 C:\Users\MGoode\Documents\MiSelf\PDP\2021-2022\TheWeatherApp\TheWeatherApp\TheWeatherApp.Api\obj\Debug\net6.0\TheWeatherApp.Api.pdb
 C:\Users\MGoode\Documents\MiSelf\PDP\2021-2022\TheWeatherApp\TheWeatherApp\TheWeatherApp.Api\obj\Debug\net6.0\TheWeatherApp.Api.genruntimeconfig.cache
+C:\Users\MGoode\Documents\MiSelf\PDP\2021-2022\TheWeatherApp\TheWeatherApp\TheWeatherApp.Api\obj\Debug\net6.0\TheWeatherApp.Api.csproj.AssemblyReference.cache

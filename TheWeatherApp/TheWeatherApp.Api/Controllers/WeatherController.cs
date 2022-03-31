@@ -22,15 +22,15 @@ public class WeatherController : ControllerBase
     }
 
     // [HttpGet]
-    [HttpGet("[action]/{cityName}")]
-    public async Task<ActionResult<WeatherResponse>> GetWeather(string cityName = "London")
+    [HttpGet("[action]")]
+    public async Task<ActionResult<WeatherResponse>> GetWeather(string location = "London")
     {
         using (var client = new HttpClient())
         {
             try
             {
                 client.BaseAddress = _baseAddress;
-                var response = await client.GetAsync($"weather?q={cityName}&appid={_key}").ConfigureAwait(false);
+                var response = await client.GetAsync($"weather?q={location}&appid={_key}").ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
                 var responseAsString = await response.Content.ReadAsStringAsync();
@@ -43,7 +43,7 @@ public class WeatherController : ControllerBase
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }            
+            }
         }
     }
 }
