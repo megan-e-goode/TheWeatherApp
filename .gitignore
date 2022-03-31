@@ -5,6 +5,7 @@
 *.cache
 *.sentinel
 *.FileListAbsolute.txt
+*.vs
 
 # User-specific files
 *.suo
