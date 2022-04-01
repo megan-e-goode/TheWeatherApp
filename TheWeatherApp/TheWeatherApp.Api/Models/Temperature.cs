@@ -4,20 +4,20 @@ using Newtonsoft.Json;
 public class Temperature
 {
     [JsonProperty("temp")]
-    public decimal Actual { get; set; }
+    public double Actual { get; set; }
 
     [JsonProperty("feels_like")]
-    public decimal FeelsLike { get; set; }
+    public double FeelsLike { get; set; }
 
     [JsonProperty("temp_min")]
-    public decimal Min { get; set; }
+    public double Min { get; set; }
 
     [JsonProperty("temp_max")]
-    public decimal Max { get; set; }
+    public double Max { get; set; }
 
     [JsonProperty("pressure")]
-    public decimal Pressure { get; set; }
+    public double Pressure { get; set; }
 
     [JsonProperty("humidity")]
-    public decimal Humidity { get; set; }
+    public double Humidity { get; set; }
 }

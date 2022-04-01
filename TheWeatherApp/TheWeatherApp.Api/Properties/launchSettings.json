@@ -12,7 +12,7 @@
     "TheWeatherApp.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "getweather",
+      "launchUrl": "api/weather/getweather",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
