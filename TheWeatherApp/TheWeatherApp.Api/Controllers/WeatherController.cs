@@ -31,8 +31,8 @@ public class WeatherController : ControllerBase
 
         if (response.StatusCode != HttpStatusCode.OK)
         {
-            _logger.LogError($"Open Weather returned: {response.StatusCode} - {response.Content}");
-            return BadRequest(response.Content);
+            _logger.LogError($"Open Weather returned: {response.StatusCode}");
+            return BadRequest($"Open Weather returned: {response.StatusCode}");
         }
 
         var responseAsString = await response.Content.ReadAsStringAsync();

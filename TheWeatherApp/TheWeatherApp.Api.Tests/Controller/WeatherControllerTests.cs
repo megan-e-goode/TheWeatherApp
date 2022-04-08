@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 public class WeatherControllerTests
 {
     private WeatherController _weatherController;
+    private Mock<HttpMessageHandler> _httpMessageHandler;
     private Mock<ILogger<WeatherController>> _loggerMock;    
     private IConfiguration _configuration;
     private HttpClient _httpClient;
@@ -36,7 +37,10 @@ public class WeatherControllerTests
             .AddInMemoryCollection(inMemorySettings)
             .Build();
 
-        SetupHttpClient();
+        _httpMessageHandler = new Mock<HttpMessageHandler>();
+        _httpClient = new HttpClient(_httpMessageHandler.Object);
+
+        SetupHttpClientMock(HttpStatusCode.OK, GetWeatherResponseAsString());
 
         _weatherController = new WeatherController(_httpClient, _loggerMock.Object, _configuration);
     }
@@ -49,12 +53,10 @@ public class WeatherControllerTests
             weatherResponse = GetWeatherResponse()
         };
 
-        SetupHttpClient(HttpStatusCode.OK, GetWeatherResponseAsString());
-
         var expectedData = new OkObjectResult(okObjectResultData);
 
-        var response = await _weatherController.GetWeather();
-        var responseData = response.Result as OkObjectResult;
+        var result = await _weatherController.GetWeather();
+        var responseData = result.Result as OkObjectResult;
 
         responseData.Should().BeEquivalentTo(expectedData);
     }
@@ -62,13 +64,14 @@ public class WeatherControllerTests
     [Test]
     public async Task GetWeather_Returns_BadRequest_Response_When_HttpClient_Call_Fails()
     {
-        var responseMessage = "Bad Request retrieving weather";
+        SetupHttpClientMock();
+        var responseMessage = "Open Weather returned: BadRequest";
         var expectedData = new BadRequestObjectResult(responseMessage);
 
         var response = await _weatherController.GetWeather();
-        var responseData = response.Result as OkObjectResult;
+        var responseData = response.Result as BadRequestObjectResult;
 
-        responseData.Should().BeEquivalentTo(expectedData);
+        responseData.Value.Should().BeEquivalentTo(expectedData.Value);
     }
 
     private WeatherResponse GetWeatherResponse()
@@ -102,23 +105,20 @@ public class WeatherControllerTests
         return JsonConvert.SerializeObject(GetWeatherResponse());
     }
 
-    private void SetupHttpClient(HttpStatusCode statusCode = HttpStatusCode.BadRequest, string content = "Bad Request retrieving weather")
-    {
-        var handlerMock = new Mock<HttpMessageHandler>();
+    private void SetupHttpClientMock(HttpStatusCode statusCode = HttpStatusCode.BadRequest, string content = "Open Weather returned: BadRequest")
+    {        
         var response = new HttpResponseMessage
         {
             StatusCode = statusCode,
             Content = new StringContent(content),
         };
 
-        handlerMock
+        _httpMessageHandler
            .Protected()
            .Setup<Task<HttpResponseMessage>>(
               "SendAsync",
               ItExpr.IsAny<HttpRequestMessage>(),
               ItExpr.IsAny<CancellationToken>())
            .ReturnsAsync(response).Verifiable();
-
-        _httpClient = new HttpClient(handlerMock.Object);
     }
 }
